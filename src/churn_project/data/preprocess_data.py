@@ -1,5 +1,4 @@
 import pandas as pd
-import os
 
 def preprocess_data(df:pd.DataFrame, target_col:str = "Churn") -> pd.DataFrame:
 
@@ -7,9 +6,7 @@ def preprocess_data(df:pd.DataFrame, target_col:str = "Churn") -> pd.DataFrame:
     df.columns = df.columns.str.strip()
 
     # drop id column
-    ## id cols contains possible LOWER CASE of header id names
-    id_cols = ['customer_id', 'customerid']
-    df = df.drop(columns=[col for col in df.columns if col.lower() in id_cols])
+    df = df.drop(columns=['customerID'])
 
     # mapping the target column (No -> 0 and Yes -> 1)
     if target_col in df.columns and df[target_col].dtype == 'object':
